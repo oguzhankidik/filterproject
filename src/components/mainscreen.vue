@@ -3,21 +3,20 @@
   <div class="main">
     <div class="headerr">
       <b>Guests</b>
-      <button type="button" class="btn btn-light">Advanced Search</button>
+
+      <button type="button" class="btn btn-light" v-on:click="isAdvanced= !isAdvanced">Advanced Search</button>
     </div>
       <div class="options">
         <div>
-          <label for="select1">Location</label>
-          <select class="form-select" aria-label="Default select example" id="select1">
-            <option selected>(All Locations)</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select>
+
+          <label >Location</label>
+       <selectform  v-on:childToParent="LocationKey" v-if="dataloaded" v-bind:message="posts[0].options" />
+
         </div>
         <div>
-          <label for="exampleInputName">Location</label>
+          <label for="exampleInputName">Name</label>
           <input type="email" class="form-control" id="exampleInputName" placeholder="Name">
+          <p>Messages is:</p>
         </div>
         <div>
           <label for="exampleInputEmail">Email</label>
@@ -29,31 +28,21 @@
         </div>
 
         <div>
-        <label for="select2">Location</label>
-        <select class="form-select" aria-label="Default select example" id="select2">
-          <option selected>(All Nationalities)</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <label>Nationality</label>
+        <selectform v-if="dataloaded" v-on:childToParent="NationalityKey" v-bind:message="posts[4].options"/>
       </div>
 
       </div>
 
 
-    <div class="advanced-options">
+    <div class="advanced-options" v-show="isAdvanced" >
       <div>
       <label for="checkPassport">Passport Number</label>
       <input type="email" class="form-control" id="checkPassport" placeholder="Name">
     </div>
       <div>
-        <label for="checkGender">Gender</label>
-        <select class="form-select" aria-label="Default select example" id="checkGender">
-          <option selected>(All Genders)</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <label >Gender</label>
+        <selectform v-if="dataloaded" v-bind:message="posts[6].options"/>
       </div>
 
       <div>
@@ -61,13 +50,8 @@
         <input type="email" class="form-control" id="checkMac" placeholder="Email">
       </div>
       <div>
-        <label for="checkConnection">Connection Status</label>
-        <select class="form-select" aria-label="Default select example" id="checkConnection">
-          <option selected>(All Connection Statuses)</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
-        </select>
+        <label >Connection Status</label>
+        <selectform v-if="dataloaded" v-bind:message="posts[8].options" />
       </div>
       <div>
         <label for="checkDate">Date</label>
@@ -81,19 +65,68 @@
 
     </div>
     <div class="Buttons">
-      <button type="button" class="btn btn-light">Clear</button>
-      <button type="button" class="btn btn-light">Search</button>
+      <button type="button"  class="btn btn-light">Clear</button>
+      <button type="button" v-on:click="searchclicked= !searchclicked" class="btn btn-light">Search</button>
     </div>
 
+    <div >
+      <div>
+        location is : {{locationInfo}}
+      </div>
+      <div>
+        nationality is : {{nationalityInfo}}
+      </div>
+
+      </div>
     </div>
 
 
 </template>
 
 <script>
+import axios from "axios";
+import selectform from "@/components/selectform";
+
 export default {
-  name: "mainscreen"
+  name:'mainscreen',
+  components: { selectform},
+  created() {
+    this.getPosts()
+  },
+  data() {
+    return {
+      searchclicked:false,
+      dataloaded:false,
+      posts: [],
+      isAdvanced:false,
+      mounted:false,
+      locationInfo:'',
+      nationalityInfo:'',
+
+
+    }
+  },
+    methods: {
+      async getPosts() {
+        const response=await axios
+            .get("http://challenge.iperasolutions.com/filters");
+        this.posts=response.data
+        this.dataloaded=true;
+
+      },
+      LocationKey (value) {
+        this.locationInfo = value
+      },
+      NationalityKey(value) {
+        this.nationalityInfo = value
+      }
+
+    },
+
+
 }
+
+
 </script>
 
 <style scoped>
