@@ -30,7 +30,7 @@
     </div>
 
     <div v-show="searchclicked">
-      <ul>
+      <ul class="liste">
         <li  v-for="(selecteditem,index) in posts" :key="index">
           {{selecteditem.title}} is : {{selecteditem.value}}
         </li>
@@ -101,6 +101,9 @@ export default {
 .options{
   display: flex;
   justify-content: center;
+}
+.liste{
+  text-align: left;
 }
 
 </style>
