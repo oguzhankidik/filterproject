@@ -1,7 +1,8 @@
 <template>
-  <div>
-  <label for="exampleInputName">Name</label>
-  <input type="email" v-model="mesaj" class="form-control" id="exampleInputName" placeholder="Name">
+  <div class="container">
+  <label>{{selecteditem.title}}</label>
+  <input :type="selecteditem.type" v-model="selecteditem.value" class="form-control" :placeholder=selecteditem.title>
+
   </div>
 </template>
 
@@ -9,11 +10,14 @@
 export default {
   name: "inputforms",
   props:{
-
+    selecteditem: {}
   }
 }
 </script>
 
 <style scoped>
+.container{
+  width: 20rem;
+}
 
 </style>
