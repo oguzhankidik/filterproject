@@ -18,16 +18,7 @@ export default {
   name: "selectform",
   props: {
     selecteditem: {},
-
   },
-  data() {
-    return {
-
-      selected: null,
-      options: this.message
-    }
-  },
-
 }
 </script>
 
