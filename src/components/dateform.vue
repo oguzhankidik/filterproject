@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div >
 <label>{{selecteditem.title}}</label>
   <input :type="selecteditem.type" v-model="selecteditem.value" class="form-control" :placeholder="selecteditem.title">
 </div>
@@ -15,7 +15,5 @@ export default {
 </script>
 
 <style scoped>
-.container{
-  width: 20rem;
-}
+
 </style>

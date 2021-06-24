@@ -6,17 +6,18 @@
 
       <button type="button" class="btn btn-light " @click="isAdvanced= !isAdvanced">Advanced Search</button>
     </div>
-      <div v-if="dataloaded" class="options">
-        <div  v-for="(selecteditem,index) in posts.slice(0,5)" :key="index">
+
+      <div v-if="dataloaded" class="row">
+        <div class="col-md-2" v-for="(selecteditem,index) in posts.slice(0,5)" :key="index">
         <inputforms v-if="selecteditem.type  === 'text'" :selecteditem="selecteditem" />
         <selectform v-if="selecteditem.type  === 'select'" :selecteditem ="selecteditem"  />
         <dateform v-if="selecteditem.type=='date'" :selecteditem="selecteditem" />
         </div>
-
       </div>
 
-    <div v-if="dataloaded" class="options" v-show="isAdvanced">
-      <div  v-for="(selecteditem,index) in posts.slice(5,10)" :key="index">
+
+    <div v-if="dataloaded" class="row" v-show="isAdvanced">
+      <div class="col-md-2" v-for="(selecteditem,index) in posts.slice(5,10)" :key="index">
         <inputforms v-if="selecteditem.type  == 'text'" :selecteditem="selecteditem"    />
         <selectform v-if="selecteditem.type  == 'select'" :selecteditem ="selecteditem"  />
         <dateform v-if="selecteditem.type =='date'" :selecteditem="selecteditem" />
@@ -36,7 +37,9 @@
         </li>
       </ul>
       </div>
+
     </div>
+
 
 
 </template>
@@ -98,12 +101,10 @@ export default {
 .btn {
   margin-left: 10px;
 }
-.options{
-  display: flex;
+
+.row{
+  text-align: center;
+
   justify-content: center;
 }
-.liste{
-  text-align: left;
-}
-
 </style>
