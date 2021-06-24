@@ -31,7 +31,7 @@
 
     <div v-show="searchclicked">
       <ul>
-        <li  v-for="(selecteditem,index) in posts.slice(0 , posts.length)" :key="index">
+        <li  v-for="(selecteditem,index) in posts" :key="index">
           {{selecteditem.title}} is : {{selecteditem.value}}
         </li>
       </ul>
