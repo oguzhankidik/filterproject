@@ -1,9 +1,10 @@
 <template>
   <div >
-    <label>{{ selecteditem.title }}</label>
-    <select v-model="selecteditem.value"  class="form-select">
+    <label >{{ selectedItem.title }}</label>
+    <select v-model="selectedItem.value"  class="form-select">
+      <option selected disabled :value=null >{{ selectedItem.title }} </option>
       <option
-        v-for="(item,index) in selecteditem.options"
+        v-for="(item,index) in selectedItem.options"
         :key="index"
         :value="item.value">
         {{ item.text }}
@@ -17,7 +18,8 @@
 export default {
   name: "selectform",
   props: {
-    selecteditem: {},
+    selectedItem: {},
+
   },
 }
 </script>

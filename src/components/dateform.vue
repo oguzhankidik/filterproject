@@ -1,15 +1,23 @@
 <template>
-<div >
-<label>{{selecteditem.title}}</label>
-  <input :type="selecteditem.type" v-model="selecteditem.value" class="form-control" :placeholder="selecteditem.title">
-</div>
+  <div>
+    <label>{{ selectedItem.title }}</label>
+    <input :type="selectedItem.type" @change="sendData" v-model="dateToChild" class="form-control">
+
+  </div>
 </template>
 
 <script>
 export default {
   name: "dateform",
-  props:{
-    selecteditem:{}
+  props: {
+    selectedItem: {},
+    dateToChild:{}
+  },
+
+  methods: {
+    sendData: function () {
+      this.$emit('sendData', this.dateToChild);
+    },
   }
 }
 </script>

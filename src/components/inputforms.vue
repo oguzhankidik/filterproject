@@ -1,7 +1,7 @@
 <template>
   <div >
-  <label>{{selecteditem.title}}</label>
-  <input :type="selecteditem.type" v-model="selecteditem.value" class="form-control" :placeholder=selecteditem.title>
+  <label>{{selectedItem.title}}</label>
+  <input :type="selectedItem.type" v-model="selectedItem.value" class="form-control" :placeholder=selectedItem.title>
 
   </div>
 </template>
@@ -10,7 +10,10 @@
 export default {
   name: "inputforms",
   props:{
-    selecteditem: {}
+    selectedItem: {}
+  },
+  methods:{
+
   }
 }
 </script>
