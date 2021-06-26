@@ -2,7 +2,7 @@
   <div >
     <label >{{ selectedItem.title }}</label>
     <select v-model="selectedItem.value"  class="form-select">
-      <option selected disabled :value=null >{{ selectedItem.title }} </option>
+      <option selected disabled :value=undefined >{{ selectedItem.title }} </option>
       <option
         v-for="(item,index) in selectedItem.options"
         :key="index"
@@ -21,6 +21,7 @@ export default {
     selectedItem: {},
 
   },
+
 }
 </script>
 

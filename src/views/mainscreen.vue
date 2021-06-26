@@ -8,30 +8,19 @@
     </div>
 
     <div v-if="dataloaded" class="grid">
-      <div v-for="(selectedItem,index) in posts.slice(0,arrLimit)" :key="index">
-        <inputforms v-if="selectedItem.type  === 'text'" :selectedItem="selectedItem"/>
-        <selectform v-if="selectedItem.type  === 'select'" :selectedItem="selectedItem" />
-        <dateform v-if="selectedItem.type==='date'" :selectedItem="selectedItem" :dateToChild="dateInfo" @sendData="updateData"/>
+      <div v-for="(selectedItem,index3) in posts.slice(0,arrLimit)" :key="index3">
+        <inputforms v-if="selectedItem.type  === 'text'" :selectedItem="selectedItem" />
+        <selectform v-if="selectedItem.type  === 'select'" :selectedItem="selectedItem"  />
+        <dateform v-if="selectedItem.type==='date'" :selectedItem="selectedItem" :dateToChild="dateInfo"  @sendData="updateData"/>
       </div>
 
     </div>
 
     <div class="buttons">
       <button type="button" @click="clearButton()" class="btn btn-light">Clear</button>
-      <button type="button" @click="searchclicked= true" class="btn btn-light">Search</button>
+      <button type="button" @click="searchButton()" class="btn btn-light">Search</button>
     </div>
-
-    <div v-show="searchclicked">
-
-      <ul class="liste">
-        <li  v-for="(selectedItem,index) in posts.slice(0,9)" :key="index">
-          {{ selectedItem.title }} is : {{ selectedItem.value }}
-        </li>
-        <li v-for="(selectedItem,index) in posts.slice(9,10)" :key="index">
-          {{ selectedItem.title }} is : {{ dateInfo }}
-        </li>
-      </ul>
-    </div>
+    <results v-show="searchclicked" :savedFilters="savedFilters" :dateInfo="savedDateInfo" :posts="posts"  />
 
   </div>
 
@@ -43,22 +32,24 @@ import axios from "axios";
 import selectform from "@/components/selectform";
 import inputforms from "@/components/inputforms";
 import Dateform from "@/components/dateform";
+import Results from "@/components/results";
 
 export default {
   name: 'mainscreen',
-  components: {Dateform, inputforms, selectform},
+  components: {Results, Dateform, inputforms, selectform},
   created() {
     this.getPosts()
   },
   data() {
     return {
-
       dateInfo: new Date().toISOString().substr(0,10),
       arrLimit:5,
+      savedFilters:[],
       isDate:false,
       searchclicked: false,
       dataloaded: false,
       posts: [],
+      savedDateInfo:'',
       isAdvanced: false,
 
     }
@@ -70,18 +61,15 @@ export default {
       const response = await axios
           .get("http://challenge.iperasolutions.com/filters");
       this.posts = response.data
-     // this.posts.forEach(item=>{
-     //  item.value=null;
-     //  })
+
       this.dataloaded = true;
 
     },
     clearButton() {
       this.searchclicked = false;
       this.posts.forEach(item => {
-        item.value = null;
+        item.value = undefined;
       })
-
       this.dateInfo=new Date().toISOString().substr(0,10);
     },
     clickAdvancedSearchButton(){
@@ -92,7 +80,17 @@ export default {
     },
     updateData(dateToChild) {
       this.dateInfo = dateToChild
-    }
+    },
+
+    searchButton(){
+      this.savedFilters.splice(0)
+      this.posts.forEach(item=>{
+        this.savedFilters.push(item.value);
+      })
+      this.savedDateInfo=this.dateInfo
+      this.searchclicked= true ;
+      this.componentKey += 1
+    },
 
   },
 }
