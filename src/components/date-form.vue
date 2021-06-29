@@ -1,14 +1,14 @@
 <template>
   <div>
     <label>{{ selectedItem.title }}</label>
-    <input :type="selectedItem.type" @change="sendData" v-model="dateToChild" class="form-control">
+    <input :type="date" @change="sendData" v-model="dateToChild" class="form-control">
 
   </div>
 </template>
 
 <script>
 export default {
-  name: "dateform",
+  name: "dateForm",
   props: {
     selectedItem: {},
     dateToChild:{}

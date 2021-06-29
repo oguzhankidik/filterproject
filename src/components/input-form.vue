@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "inputforms",
+  name: "inputForm",
   props:{
     selectedItem: {}
   },
