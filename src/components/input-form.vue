@@ -12,7 +12,7 @@ export default {
   props:{
     selectedItem: {
       type :Object,
-      default: ()=> []
+      default: ()=> {}
     }
   },
   methods:{

@@ -1,11 +1,5 @@
 <template>
-  <div >
-    <ul>
-      <li  v-for="(selectedItem,index) in savedFilters.slice(0,10)" :key="index">
-        {{posts[index].title}} is : {{selectedItem}}
-      </li>
-    </ul>
-  </div>
+
 </template>
 
 <script>

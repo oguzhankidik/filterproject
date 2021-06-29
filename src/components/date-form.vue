@@ -1,8 +1,7 @@
 <template>
   <div>
     <label>{{ selectedItem.title }}</label>
-    <input type="date" @change="sendData" v-model="dateToChild" class="form-control">
-<label>{{keyofdate}}</label>
+    <input type="date" v-model="selectedItem.value" class="form-control">
   </div>
 </template>
 
@@ -12,19 +11,11 @@ export default {
   props: {
     selectedItem: {
       type :Object,
-      default: ()=> []
+      default: ()=> {}
     },
-    keyofdate:{
-      required :true
-    },
-    dateToChild:{},
-
   },
 
   methods: {
-    sendData: function (event) {
-      this.$emit('sendData', event.target.value,this.keyofdate);
-    },
   }
 }
 </script>
