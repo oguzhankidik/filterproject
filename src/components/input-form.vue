@@ -10,7 +10,10 @@
 export default {
   name: "inputForm",
   props:{
-    selectedItem: {}
+    selectedItem: {
+      type :Object,
+      default: ()=> []
+    }
   },
   methods:{
 

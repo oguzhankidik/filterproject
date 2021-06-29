@@ -18,7 +18,10 @@
 export default {
   name: "selectForm",
   props: {
-    selectedItem: {},
+    selectedItem: {
+      type :Object,
+      default: ()=> []
+    },
 
   },
 

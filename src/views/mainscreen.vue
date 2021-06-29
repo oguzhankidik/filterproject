@@ -8,10 +8,10 @@
     </div>
 
     <div v-if="dataLoaded" class="row">
-      <div v-for="(item,index3) in posts.slice(0,arrLimit)" class="col-lg-3 col-md-2 col-sm-3 mb-2" :key="index3">
+      <div v-for="(item,index3) in posts.slice(0,arrLimit)" class="col-lg-5ths col-md-2 col-sm-3 mb-2 " :key="index3">
         <input-form v-if="item.type  === 'text'" :selectedItem="item" />
         <select-form v-if="item.type  === 'select'" :selectedItem="item"  />
-        <date-form v-if="item.type ==='date'" :selectedItem="item" :dateToChild="dateInfo"  @sendData="updateData"/>
+        <date-form v-if="item.type ==='date'" :selectedItem="item" :dateToChild="dateInfo" :keyofdate="index3" @sendData="updateData"/>
       </div>
 
     </div>
@@ -20,6 +20,7 @@
       <button type="button" @click="clearButton" class="btn btn-light">Clear</button>
       <button type="button" @click="searchButton" class="btn btn-light">Search</button>
     </div>
+      {{posts[9]}}
     <results v-show="searchClicked" :savedFilters="savedFilters" :dateInfo="savedDateInfo" :posts="posts"  />
 
   </div>
@@ -44,6 +45,7 @@ export default {
     return {
       dateInfo: new Date().toISOString().substr(0,10),
       arrLimit:5,
+      savedDate2: null,
       savedFilters:[],
       isDate:false,
       searchClicked: false,
@@ -76,8 +78,11 @@ export default {
       this.arrLimit = this.arrLimit === 5 ?10 :5
     },
 
-    updateData(dateToChild) {
-      this.dateInfo = dateToChild
+    updateData(dateToChild,key) {
+      console.log(key,dateToChild)
+      this.posts[key].value = dateToChild
+      this.savedDate2 = dateToChild
+
     },
 
     searchButton(){
@@ -85,7 +90,8 @@ export default {
       this.posts.forEach(item=>{
         this.savedFilters.push(item.value);
       })
-      this.savedDateInfo=this.dateInfo
+      this.dateInfo=this.savedDate2
+      this.savedDateInfo=this.savedDate2
       this.searchClicked= true;
     },
   },
@@ -111,6 +117,12 @@ export default {
 
 .btn {
   margin-left: 10px;
+}
+.col-lg-5ths {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 </style>
