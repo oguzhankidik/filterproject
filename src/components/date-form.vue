@@ -1,7 +1,7 @@
 <template>
   <div>
     <label>{{ selectedItem.title }}</label>
-    <input :type="date" @change="sendData" v-model="dateToChild" class="form-control">
+    <input type="date" @change="sendData" v-model="dateToChild" class="form-control">
 
   </div>
 </template>
