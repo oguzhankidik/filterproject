@@ -81,7 +81,7 @@ export default {
     },
 
     searchButton(){
-      this.savedFilters.splice(0)
+      this.savedFilters=[];
       this.posts.forEach(item=>{
         this.savedFilters.push(item.value);
       })
