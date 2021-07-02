@@ -6,8 +6,8 @@
       <button type="button" class="btn  btn-outline-secondary" @click="clickAdvancedSearchButton">Advanced Search</button>
     </div>
 
-    <div v-if="dataLoaded" class="row">
-      <div v-for="(item,index3) in posts.slice(0,arrLimit)" class="col-lg-2 col-md-6 col-sm-6 col-12 mb-2 " :key="index3">
+    <div class="row">
+      <div v-for="(item,index3) in posts.slice(0,arrLimit)" class="col-lg-3 col-md-6 col-sm-6 col-12 mb-2 " :key="index3">
         <input-form v-if="item.type  === 'text'" :selectedItem="item" />
         <select-form v-if="item.type  === 'select'" :selectedItem="item"  />
         <date-form v-if="item.type ==='date'" :selectedItem="item"/>
@@ -53,11 +53,9 @@ export default {
 
       arrLimit:5,
       savedFilters:[],
-      isDate:false,
       searchClicked: false,
       dataLoaded: false,
       posts: [],
-      isAdvanced: false,
 
     }
   },
@@ -99,7 +97,6 @@ export default {
     },
 
     searchButton(){
-
       this.savedFilters = JSON.parse(JSON.stringify(this.posts))
       this.searchClicked= true;
     },
@@ -116,11 +113,5 @@ export default {
   margin-left: 10px;
 }
 
-.col-lg-5ths {
-  position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-}
 
 </style>
